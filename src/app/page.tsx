@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Spline from '@splinetool/react-spline/next';
+import Hero from "@/components/hero";
 
 gsap.registerPlugin(ScrollTrigger,SplitText);
 
@@ -17,8 +18,7 @@ export default function Home() {
       />
       </div>
       <Navbar />
-
-      <div className="h-[1000px]"></div>
+      <Hero />
     </main>
   );
 }

@@ -4,6 +4,7 @@ import { Button } from './ui/button'
 import { useGSAP } from "@gsap/react";  
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ColoredText from './coloredText';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -30,7 +31,7 @@ function Navbar() {
   },[])
 
   return (
-    <header id='navbar' className='personalized-conteiner mt-2 py-3  px-7 fixed'>
+    <header id='navbar' className='personalized-conteiner mt-2 py-3  px-7 fixed z-50'>
       <nav className='flex items-center justify-between h-13'>
         <div className='gap-3'>
           <Image src={'/zion-seo-logo.webp'} height={40} width={40} alt='logo' className='rounded-md' />
@@ -45,8 +46,8 @@ function Navbar() {
         </div>
 
         <div className=''>
-          <Button className='px-5 text-lg bg-white hover:bg-white/75 rounded-full'>
-            <span className='bg-gradient-to-r from-green-500 to-blue-400 bg-clip-text text-transparent font-medium'>Try for free</span>
+          <Button variant={'primary'}>
+            <ColoredText text='Try for free' />          
           </Button>
         </div>
       </nav>
