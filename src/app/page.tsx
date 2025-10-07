@@ -2,23 +2,21 @@ import Navbar from "../components/navbar";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import Spline from '@splinetool/react-spline/next';
 import Hero from "@/components/hero";
+import Clients from "@/components/clients";
+import Spline3D from "@/components/spline3d";
 
-gsap.registerPlugin(ScrollTrigger,SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 
 export default function Home() {
 
   return (
-    <main className={`font-poppins flex justify-center`}>
-      <div className="w-full clip-trapezoid h-dvh">
-        <Spline
-        scene="https://prod.spline.design/2CH7eFfCTJgiqdt0/scene.splinecode" 
-      />
-      </div>
+    <main className={`font-poppins w-full`}>
       <Navbar />
+      <Spline3D />
       <Hero />
+      <Clients />
     </main>
   );
 }
