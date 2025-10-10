@@ -5,7 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-poppins: Poppins, 'sans-serif'
+  --font-poppins: Poppins, 'sans-serif';
+  --color-gray-30: #f9fafa;
 }
 
 html,
@@ -15,7 +16,7 @@ body {
 }
 
 @utility personalized-conteiner {
-  @apply w-[24rem] sm:w-[40rem] md:w-[48rem] lg:w-[64rem] xl:w-[80rem]
+  @apply w-[22rem] sm:w-[40rem] md:w-[48rem] lg:w-[64rem] xl:w-[80rem]
 }
 
 @utility flex-center {
