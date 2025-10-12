@@ -44,6 +44,10 @@ body {
   flex: 0 0 5rem;
 }
 
+@utility feedback-card {
+  @apply flex flex-col gap-5 lg:p-8 sm:p-6 p-4 shadow-sm rounded-3xl bg-white lg:w-100 md:w-90 w-80;
+}
+
 @utility group {
   @apply flex-center gap-[1rem] pr-[1em];
   flex-shrink: 0;
@@ -61,6 +65,21 @@ body {
   to {
     transform: translateX(-50%);
   }
+}
+
+@utility feedback-carousel {
+  @apply flex-center flex-col gap-5 flex-wrap overflow-hidden lg:h-160 md:h-150 h-130 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)];
+  will-change: transform;
+}
+
+@utility feedback-group {
+  @apply flex-center flex-col gap-5 pb-5;
+  will-change: transform;
+}
+
+@utility feedback-track-up {
+  @apply flex flex-col;
+  will-change: transform;
 }
 
 * {

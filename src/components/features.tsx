@@ -5,10 +5,6 @@ import { Button } from './ui/button'
 import ColoredText from './coloredText'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-
-// gsap.registerPlugin(ScrollTrigger);
 
 function Features() {
     useGSAP(() => {

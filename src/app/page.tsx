@@ -6,6 +6,8 @@ import Hero from "@/components/hero";
 import Clients from "@/components/clients";
 import Spline3D from "@/components/spline3d";
 import Features from "@/components/features";
+import Pricing from "@/components/pricing";
+import Feedback from "@/components/feedback";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -19,6 +21,8 @@ export default function Home() {
       <Hero />
       <Clients />
       <Features />
+      <Feedback />
+      <Pricing />
     </main>
   );
 }

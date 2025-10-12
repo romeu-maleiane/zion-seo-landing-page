@@ -3,11 +3,11 @@ import Image from 'next/image'
 import { Button } from './ui/button'
 import { useGSAP } from "@gsap/react";
 import gsap from 'gsap'
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger, SplitText } from "gsap/all";
 import ColoredText from './coloredText';
 
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 
 function Navbar() {
@@ -21,7 +21,7 @@ function Navbar() {
     })
 
     navTween.fromTo('#navbar', { backgroundColor: 'transparent' }, {
-      backgroundColor: '#dddddd50',
+      backgroundColor: '#dddddd70',
       backgroundFilter: 'blur(10px)',
       borderRadius: '50px',
       width: '70rem',
