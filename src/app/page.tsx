@@ -8,6 +8,7 @@ import Spline3D from "@/components/spline3d";
 import Features from "@/components/features";
 import Pricing from "@/components/pricing";
 import Feedback from "@/components/feedback";
+import FAQ from "@/components/faq";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -23,6 +24,7 @@ export default function Home() {
       <Features />
       <Feedback />
       <Pricing />
+      <FAQ />
     </main>
   );
 }

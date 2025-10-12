@@ -107,8 +107,32 @@ const testimonials = [
   },
 ];
 
+const faqs = [
+  {
+    title: "What is Zion SEO?",
+    description:
+      "Zion SEO is an AI-powered SEO tool built for e-commerce stores. It helps you optimize product descriptions, metadata, and AI visibility—so your store ranks higher on Google and ChatGPT search results.",
+  },
+  {
+    title: "How does Zion SEO help my store grow?",
+    description:
+      "By automating SEO tasks like description writing, metadata optimization, and LLMs indexing, Zion SEO saves you hours of manual work while boosting your traffic and conversions.",
+  },
+  {
+    title: "Do I need SEO experience to use it?",
+    description:
+      "Not at all. Zion SEO was designed for store owners and marketers, not technical experts. Its intuitive interface lets anyone create optimized content in just a few clicks.",
+  },
+  {
+    title: "What makes Zion SEO different from other tools?",
+    description:
+      "Zion SEO combines traditional SEO best practices with advanced AI. Unlike basic keyword tools, it creates optimized content, structures data for AI crawlers, and enhances your visibility automatically.",
+  },
+];
+
 export {
   clients,
   plans,
-  testimonials
+  testimonials,
+  faqs
 }
