@@ -9,6 +9,8 @@ import Features from "@/components/features";
 import Pricing from "@/components/pricing";
 import Feedback from "@/components/feedback";
 import FAQ from "@/components/faq";
+import Footer from "@/components/footer";
+import CallToAction from "@/components/callToAction";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -25,6 +27,8 @@ export default function Home() {
       <Feedback />
       <Pricing />
       <FAQ />
+      <CallToAction />
+      <Footer />
     </main>
   );
 }

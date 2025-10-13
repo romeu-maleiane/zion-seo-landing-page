@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from 'gsap'
 import { ScrollTrigger, SplitText } from "gsap/all";
 import ColoredText from './coloredText';
+import Link from 'next/link';
 
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -34,9 +35,9 @@ function Navbar() {
     <header className='flex-x-center'>
       <div id='navbar' className='personalized-conteiner mt-2 py-1.5  px-4 fixed z-50'>
         <nav className='flex items-center justify-between h-13'>
-          <div className='gap-3'>
+          <Link href={'/'}>
             <Image src={'/zion-seo-logo.webp'} height={40} width={40} alt='logo' className='rounded-md' />
-          </div>
+          </Link>
 
           <div className=''>
             <ul className='flex-center text-black gap-5 text-xl font-medium '>

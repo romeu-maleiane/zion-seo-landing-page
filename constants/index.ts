@@ -109,9 +109,9 @@ const testimonials = [
 
 const faqs = [
   {
-    title: "What is Zion SEO?",
+    title: "Is there a free plan available?",
     description:
-      "Zion SEO is an AI-powered SEO tool built for e-commerce stores. It helps you optimize product descriptions, metadata, and AI visibility—so your store ranks higher on Google and ChatGPT search results.",
+      "Yes. Zion SEO offers a Starter plan with limited access to key features like the Metadata Generator and Description Generator—perfect for trying out the platform before upgrading.",
   },
   {
     title: "How does Zion SEO help my store grow?",
