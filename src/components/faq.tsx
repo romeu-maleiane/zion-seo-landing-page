@@ -10,7 +10,7 @@ import { faqs } from '../../constants'
 
 function FAQ() {
     return (
-        <section className='md:pb-30 pb-20 flex-x-center'>
+        <section className='font-poppins md:pb-30 pb-20 flex-x-center'>
             <div className='personalized-conteiner'>
                 <h2 className='md:pb-10 pb-5 text-center text-black/80 xl:text-6xl  md:text-5xl sm:text-4xl text-3xl font-semibold'>
                     Frequently Asked Questions

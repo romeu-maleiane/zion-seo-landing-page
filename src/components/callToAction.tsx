@@ -36,7 +36,7 @@ function CallToAction() {
     })
 
     return (
-        <div className='flex-center flex-col gap-5 md:gap-10 md:mb-30 mb-20'>
+        <div className='font-poppins flex-center flex-col gap-5 md:gap-10 md:mb-30 mb-20'>
             <h2 id='title' className='text-center text-black/80 xl:text-6xl  md:text-5xl sm:text-4xl text-3xl font-semibold'>Start for free today</h2>
             <p id='description' className='md:w-150 w-80 text-center md:text-xl text-lg'>
                 At Zion SEO, we deliver results that make a real difference.

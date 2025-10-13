@@ -8,7 +8,7 @@ function Feedback() {
     const thirdTestemonials = testimonials.slice(6, 9)
 
     return (
-        <section className='md:pb-30 pb-20 flex-x-center'>
+        <section className='font-poppins md:pb-30 pb-20 flex-x-center'>
             <div className='personalized-conteiner flex-center gap-5 md:gap-10 flex-col'>
                 <h2 className='text-center text-black/80 xl:text-6xl  md:text-5xl sm:text-4xl text-3xl font-semibold'>What our clients say</h2>
                 <p className='md:w-150 w-80 text-center md:text-lg'> 

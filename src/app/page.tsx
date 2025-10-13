@@ -18,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function Home() {
 
   return (
-    <main className={`font-poppins w-full bg-gray-30`}>
+    <main className={`w-full bg-gray-30`}>
       <Navbar />
       <Spline3D />
       <Hero />

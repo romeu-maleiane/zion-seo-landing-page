@@ -94,7 +94,7 @@ function Features() {
 
     })
     return (
-        <section className='md:pb-30 pb-20 flex-x-center'>
+        <section className='font-poppins md:pb-30 pb-20 flex-x-center'>
             <div className='personalized-conteiner'>
                 <div className="grid grid-rows-3 justify-items-center gap-10">
                     <div className='flex flex-col lg:flex-row justify-between items-center bg-white h-fit lg:w-full lg:p-12 sm:p-8 p-6 shadow-sm rounded-3xl'>

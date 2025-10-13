@@ -30,7 +30,7 @@ function Hero() {
     }, [])
 
     return (
-        <section className='h-fit flex-x-center z-10 top-0'>
+        <section className='font-poppins h-fit flex-x-center z-10 top-0'>
             <div className='personalized-conteiner'>
                 <div id='hero' className='md:pt-30 pt-35 w-95 md:w-115 xl:w-175'>
                     <div className='flex-center gap-1 md:text-sm text-xs font-semibold py-2 px-4 bg-[#ffffff50] rounded-full w-fit'>
