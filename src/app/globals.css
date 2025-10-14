@@ -76,7 +76,7 @@ body {
 }
 
 @utility feedback-card {
-  @apply flex flex-col gap-5 lg:p-8 sm:p-6 p-4 shadow-sm rounded-3xl bg-white lg:w-100 md:w-90 w-80;
+  @apply flex flex-col gap-5 lg:p-8 sm:p-6 p-4 shadow-sm rounded-3xl bg-white xl:w-100 lg:w-80 md:w-90 w-80;
 }
 
 @utility group {
