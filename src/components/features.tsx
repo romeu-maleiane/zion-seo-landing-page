@@ -127,7 +127,7 @@ function Features() {
                 <div className="grid grid-rows-3 justify-items-center gap-10">
                     <div className='feature-card'>
                         <div className=''>
-                            <img src={'/feature-1.webp'} loading='lazy' alt='feature 1' id='feature-image-1 ' className='rounded-2xl xl:w-130 xl:h-130 lg:w-110 lg:h-110 md:w-170 md:h-170 sm:w-140 sm:h-140 w-70 h-70 bg-black'>
+                            <img src={'/feature-1.webp'} loading='lazy' alt='feature 1' id='feature-image-1' className='rounded-2xl xl:w-130 xl:h-130 lg:w-110 lg:h-110 md:w-170 md:h-170 sm:w-140 sm:h-140 w-70 h-70 bg-black'>
                             </img>
                         </div>
                         <div id='feature-text-1' className='feature-content'>
