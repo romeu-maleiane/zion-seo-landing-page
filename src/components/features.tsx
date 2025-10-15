@@ -122,7 +122,7 @@ function Features() {
 
     })
     return (
-        <section id='features' className='font-poppins md:pb-30 pb-20 flex-x-center'>
+        <section id='features' className='md:pb-30 pb-20 flex-x-center'>
             <div className='personalized-conteiner space-y-10'>
                 <div className="grid grid-rows-3 justify-items-center gap-10">
                     <div className='feature-card'>

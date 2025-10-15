@@ -3,7 +3,7 @@ import { clients } from '../../constants'
 
 function Clients() {
     return (
-        <div className='font-poppins md:py-30 py-20 flex-x-center'>
+        <div className=' md:py-30 py-20 flex-x-center'>
             <div className='personalized-conteiner'>
                 <h2 className='text-center text-black/80 md:text-3xl text-2xl font-semibold pb-5'>
                     Trusted by shopify stores scaling their visibility every day.

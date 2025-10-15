@@ -31,7 +31,7 @@ function Pricing() {
     })
 
   return (
-    <section id='pricing' className='font-poppins md:pb-30 pb-20 flex-x-center'>
+    <section id='pricing' className='md:pb-30 pb-20 flex-x-center'>
         <div className='personalized-conteiner'>
             <h2 id='price-section-title' className='md:pb-10 pb-5 text-center text-black/40 xl:text-6xl  md:text-5xl sm:text-4xl text-3xl font-semibold'>
                 Flexible SEO Plans Built for Growing E-commerce Brands

@@ -41,7 +41,7 @@ function FeedbackCol({ testimonials, duration, className }: FeedbackColProps) {
     }, []);
 
     return (
-        <div className={twMerge(`font-poppins feedback-track ${className}`)} ref={trackRef}>
+        <div className={twMerge(`feedback-track ${className}`)} ref={trackRef}>
             {[...Array(3)].map((_, i) => (
                 <div key={i} className="feedback-group">
                     {testimonials.map(({ feedback, name, photo, store }, j) => (

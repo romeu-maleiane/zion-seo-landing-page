@@ -24,7 +24,7 @@ const PricingCard = ({
 }: PricingCardProps) => {
     return (
         <div
-            className={`font-poppins w-full shadow-sm rounded-3xl ${mostPopular
+            className={`w-full shadow-sm rounded-3xl ${mostPopular
                 ? 'text-white bg-gradient-to-r from-green-500 to-blue-400'
                 : 'bg-white'
             } lg:p-8 sm:p-6 p-4 ${className}`}

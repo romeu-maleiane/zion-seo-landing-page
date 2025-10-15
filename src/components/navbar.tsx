@@ -35,7 +35,7 @@ function Navbar() {
   }, [])
 
   return (
-    <header className='font-poppins flex-x-center'>
+    <header className='flex-x-center'>
       <div id='navbar' className='personalized-conteiner mt-2 py-1.5  px-4 fixed z-50'>
         <nav className='flex items-center flex-wrap justify-between h-13'>
           <Link href={'/'}>
