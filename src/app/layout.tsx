@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ReactLenis } from '@/lib/lenis'
 
 export const metadata: Metadata = {
   title: "Zion SEO – AI SEO Tools for Higher Rankings on Google and ChatGPT",
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <ReactLenis root>
+          {children}
+        </ReactLenis>
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ function Footer() {
         const footerTween = gsap.timeline({
             scrollTrigger: {
                 trigger: '#footer',
-                start: 'top 10%',
+                start: 'top 30%',
             }
         })
 
@@ -24,7 +24,7 @@ function Footer() {
     })
 
     return (
-        <footer id='footer' className='flex-x-center md:h-180 h-200 overflow-hidden bg-blue-500 clip-reverse-trapezoid' >
+        <footer id='footer' className='flex-x-center md:h-160 h-200 overflow-hidden bg-blue-500 clip-reverse-trapezoid' >
             <div className='personalized-conteiner text-white flex flex-col justify-between'>
                 <div className='flex md:flex-row flex-col md:gap-0 gap-5 md:items-center items-start justify-between pt-70'>
                     <div className='w-70 flex justify-start gap-5 flex-col'>
