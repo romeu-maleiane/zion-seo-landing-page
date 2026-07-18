@@ -1,0 +1,46 @@
+/* Blog-specific presentation overrides. */
+
+/* The listing is complete on this page, so no secondary browse action is needed. */
+#articles ~ * a[href="#articles"],
+main:has(#articles) a[href="#articles"] {
+  display: none;
+}
+
+/* Article cards are editorial text cards rather than image cards. */
+#articles article > div:first-child {
+  display: none;
+}
+
+#articles article > div:last-child {
+  padding: 0.25rem 0.5rem 0.5rem;
+}
+
+#articles article > div:last-child > p:first-child {
+  display: none;
+}
+
+#articles article > div:last-child > h3 {
+  margin-top: 0;
+}
+
+/* The third page section is the CTA. Reuse the feature artwork as its backdrop. */
+main:has(#articles) > section:nth-of-type(3) > div {
+  background-image: linear-gradient(rgb(0 0 0 / 12%), rgb(0 0 0 / 12%)), url('/feature-bg.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+main:has(#articles) > section:nth-of-type(3) h2 {
+  color: white;
+}
+
+main:has(#articles) > section:nth-of-type(3) p {
+  color: rgb(255 255 255 / 80%);
+}
+
+main:has(#articles) > section:nth-of-type(3) a[href="/"] {
+  background: white;
+  color: rgb(0 0 0 / 80%);
+}
