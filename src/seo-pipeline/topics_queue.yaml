@@ -1,0 +1,30 @@
+topics:
+- id: shopify-product-page-seo
+  keyword: Shopify product page SEO
+  intent: how_to
+  search_volume: 0
+  difficulty: 0
+  bullets:
+  - Explain the main elements of Shopify product page SEO, including the product title,
+    description, search engine listing, images, URL handle, and internal links
+  - Give a practical step-by-step workflow for optimizing a Shopify product page without
+    keyword stuffing or rewriting useful product information
+  - Explain how to choose a primary keyword based on product relevance, buyer intent,
+    and the search results currently ranking for that query
+  - Cover common problems such as duplicate supplier descriptions, missing metadata,
+    thin content, unclear product benefits, and product pages competing with collections
+  - Show how merchants can verify their changes using Google Search Console, Shopify
+    previews, and manual checks of the published product page
+  - Clarify that SEO improvements do not guarantee rankings and may take time to be
+    crawled, indexed, and reflected in search performance
+  internal_links:
+  - url: https://<your-zion-domain>/
+    anchor_hint: optimize Shopify product content and metadata with Zion SEO
+  - url: https://<your-zion-domain>/blog
+    anchor_hint: explore more practical Shopify SEO guides
+  external_links:
+  - url: https://help.shopify.com/en/manual/promoting-marketing/seo
+    note: Official Shopify overview of built-in SEO features and optimization guidance
+  - url: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+    note: Official Google guidance on creating search-friendly pages
+  status: drafted

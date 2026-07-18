@@ -1,0 +1,84 @@
+# Seed pillars for Zion SEO keyword research.
+# These are broad starting points for OpenSEO.
+# The research agent should expand them into validated long-tail keywords.
+
+pillars:
+  - name: shopify_seo_fundamentals
+    seeds:
+      - "Shopify SEO"
+      - "Shopify SEO guide"
+      - "Shopify SEO checklist"
+      - "how to improve SEO on Shopify"
+      - "Shopify SEO for beginners"
+      - "how to rank a Shopify store on Google"
+
+  - name: shopify_on_page_seo
+    seeds:
+      - "Shopify on page SEO"
+      - "Shopify product page SEO"
+      - "Shopify collection page SEO"
+      - "Shopify homepage SEO"
+      - "Shopify title tags and meta descriptions"
+      - "Shopify internal linking"
+
+  - name: shopify_technical_seo
+    seeds:
+      - "Shopify technical SEO"
+      - "Shopify sitemap SEO"
+      - "Shopify robots.txt SEO"
+      - "Shopify duplicate content SEO"
+      - "Shopify canonical tags"
+      - "Shopify products not indexed by Google"
+
+  - name: shopify_content_and_keywords
+    seeds:
+      - "keyword research for Shopify"
+      - "Shopify blog SEO"
+      - "ecommerce content strategy"
+      - "buyer intent keywords for ecommerce"
+      - "how to use keywords on Shopify"
+      - "Shopify product description SEO"
+
+  - name: shopify_seo_growth
+    seeds:
+      - "how to increase Shopify organic traffic"
+      - "Shopify store not ranking on Google"
+      - "Shopify SEO mistakes"
+      - "Shopify SEO audit"
+      - "SEO strategy for Shopify stores"
+      - "how long does Shopify SEO take"
+
+  - name: ai_seo_for_shopify
+    seeds:
+      - "AI SEO for Shopify"
+      - "Shopify AI search optimization"
+      - "how to optimize Shopify for ChatGPT"
+      - "Shopify agents.md"
+      - "Shopify llms.txt"
+      - "AI product discovery for ecommerce"
+
+  - name: shopify_seo_tools
+    seeds:
+      - "best Shopify SEO apps"
+      - "Shopify SEO tools"
+      - "free Shopify SEO tools"
+      - "Shopify SEO app comparison"
+      - "AI SEO app for Shopify"
+      - "Shopify SEO automation"
+
+  - name: competitor_alternatives
+    seeds:
+      - "SearchPie alternative"
+      - "TinyIMG alternative"
+      - "Smart SEO alternative"
+      - "SEOAnt alternative"
+      - "Shopify Magic alternative"
+      - "Naridon alternative"
+
+# Add only real, published Zion SEO URLs.
+internal_pages:
+  - url: "https://zionseo.com/"
+    topic: "Zion SEO product overview"
+
+  - url: "https://zionseo.com/blog"
+    topic: "Shopify SEO guides and resources"
