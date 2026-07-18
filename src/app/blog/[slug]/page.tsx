@@ -31,8 +31,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   let MDXContent: React.ComponentType
   try {
-    const module = await import(`../_posts/${post.slug}.mdx`)
-    MDXContent = module.default
+    const mdxModule = await import(`../_posts/${post.slug}.mdx`)
+    MDXContent = mdxModule.default
   } catch {
     notFound()
   }

@@ -47,6 +47,7 @@ function Navbar() {
               <li className='hover:text-black/75 cursor-pointer'><Link href={'#about'}> About </Link></li>
               <li className='hover:text-black/75 cursor-pointer'><Link href={'#features'}> Features </Link></li>
               <li className='hover:text-black/75 cursor-pointer'><Link href={'#pricing'}> Pricing </Link></li>
+              <li className='hover:text-black/75 cursor-pointer'><Link href={'/blog'}> Blog </Link></li>
             </ul>
           </div>
 
