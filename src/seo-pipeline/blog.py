@@ -1,0 +1,269 @@
+#!/usr/bin/env python3
+"""
+blog.py — Zion SEO blog generation engine.
+
+Reads a topic brief from topics_queue.yaml (populated by the research
+agent using OpenSEO MCP data) and generates a full MDX draft using Gemini.
+
+Usage:
+    python seo-pipeline/blog.py --topic-id pdf-to-audio-study
+    python seo-pipeline/blog.py --refresh pdf-to-audio-study --notes "CTR low, tighten title"
+    python seo-pipeline/blog.py --all-new          # draft every queued topic with status: new
+
+Requires:
+    pip install google-genai pyyaml
+    export GEMINI_API_KEY=...
+"""
+
+import argparse
+import datetime as dt
+import pathlib
+import re
+import sys
+import os
+
+import yaml
+from google import genai
+
+PIPELINE_DIR = pathlib.Path(__file__).resolve().parent
+ROOT = PIPELINE_DIR.parent
+QUEUE_PATH = PIPELINE_DIR / "topics_queue.yaml"
+BRAND_VOICE_PATH = PIPELINE_DIR / "brand-voice.md"
+PROMPT_PATH = PIPELINE_DIR / "prompts" / "blog.md"
+POSTS_DIR = ROOT / "app" / "blog" / "_posts"
+MODEL = "gemini-3.5-flash"
+
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+
+def slugify(text: str) -> str:
+    text = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return re.sub(r"-{2,}", "-", text)
+
+
+def load_queue() -> dict:
+    with open(QUEUE_PATH, encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def save_queue(data: dict) -> None:
+    with open(QUEUE_PATH, "w", encoding="utf-8") as f:
+        yaml.safe_dump(data, f, sort_keys=False, allow_unicode=True)
+
+
+def find_topic(data: dict, topic_id: str) -> dict:
+    for t in data["topics"]:
+        if t["id"] == topic_id:
+            return t
+    raise SystemExit(f"No topic with id '{topic_id}' in {QUEUE_PATH}")
+
+
+def load_prompt() -> str:
+    return PROMPT_PATH.read_text(encoding="utf-8")
+
+
+def render_prompt(template: str, data: dict) -> str:
+    for key, value in data.items():
+        template = template.replace("{{" + key + "}}", str(value))
+    return template
+
+
+def build_prompt(topic: dict, brand_voice: str, refresh_notes: str | None,
+                  existing_body: str | None) -> str:
+
+    template = load_prompt()
+
+    internal_links = "\n".join(
+        f"- {l['url']} (anchor idea: {l.get('anchor_hint', '')})"
+        for l in topic.get("internal_links", [])
+    )
+
+    external_links = "\n".join(
+        f"- {l['url']} ({l.get('note', '')})"
+        for l in topic.get("external_links", [])
+    )
+
+    bullets = "\n".join(f"- {b}" for b in topic.get("bullets", []))
+
+    notes_block = f"\n\nRANKING NOTES FROM OPENSEO DATA:\n{refresh_notes}" if refresh_notes else ""
+    existing_block = f"\n\nEXISTING POST TO REFRESH:\n---\n{existing_body}\n---" if existing_body else ""
+
+    data = {
+        "brand_voice": brand_voice,
+        "keyword": topic["keyword"],
+        "intent": topic.get("intent", "informational"),
+        "bullets": bullets,
+        "internal_links": internal_links or "(none provided)",
+        "external_links": external_links or "(none provided)",
+        "notes_block": notes_block,
+        "existing_block": existing_block
+    }
+
+    return render_prompt(template, data)
+
+
+def generate(topic: dict, refresh_notes: str | None = None,
+             existing_body: str | None = None) -> str:
+
+    brand_voice = BRAND_VOICE_PATH.read_text(encoding="utf-8")
+    prompt = build_prompt(topic, brand_voice, refresh_notes, existing_body)
+
+    resp = client.models.generate_content(
+        model=MODEL,
+        contents=prompt,
+    )
+    return resp.text
+
+
+def split_frontmatter(content: str) -> tuple[dict, str]:
+    """Split MDX into (frontmatter dict, body markdown)."""
+    m = re.match(r"^---\n(.*?)\n---\n(.*)$", content, re.DOTALL)
+    if not m:
+        raise ValueError("Model output missing valid frontmatter block")
+    front = yaml.safe_load(m.group(1))
+    body = m.group(2)
+    return front, body
+
+
+
+def sanitize_body(body: str) -> str:
+    """
+    Escape characters that break the @next/mdx acorn (JSX) parser.
+
+    The MDX compiler treats `{` and `}` as JSX expression delimiters.
+    If the AI writes prose like "use the {filename} format" or
+    "press {Enter}", the compiler will crash trying to parse that as JSX.
+
+    Strategy:
+      1. Split the body on fenced code blocks (``` ... ```).
+      2. Leave code segments untouched.
+      3. In prose segments, replace bare `{` -> `\\{` and `}` -> `\\}`
+         but skip inline code spans (`code`).
+    """
+    # Split on fenced code blocks (``` or ~~~) — keep delimiters in list
+    segments = re.split(r'(```[\s\S]*?```|~~~[\s\S]*?~~~)', body)
+    sanitized = []
+    for i, seg in enumerate(segments):
+        is_fenced_block = i % 2 == 1  # odd indices are the captured groups
+        if is_fenced_block:
+            sanitized.append(seg)
+        else:
+            # In prose: protect inline code spans, then escape braces
+            parts = re.split(r'(`[^`]*`)', seg)
+            escaped_parts = []
+            for j, part in enumerate(parts):
+                is_inline_code = j % 2 == 1
+                if is_inline_code:
+                    escaped_parts.append(part)
+                else:
+                    part = part.replace('{', r'\{')
+                    part = part.replace('}', r'\}')
+                    escaped_parts.append(part)
+            sanitized.append(''.join(escaped_parts))
+    return ''.join(sanitized)
+
+
+# NOTE: FAQ JSON-LD is no longer embedded in MDX files.
+# It is now generated server-side in app/blog/[slug]/page.tsx
+# directly from the `faq` field in the frontmatter.
+# Embedding <script> tags in MDX breaks the @next/mdx acorn parser.
+
+
+
+def qa_check(front: dict, body: str) -> list[str]:
+    problems = []
+    faq = front.get("faq", [])
+    if len(faq) < 6:
+        problems.append(f"Only {len(faq)} FAQ entries in frontmatter (need 6+)")
+    if len(front.get("title", "")) > 60:
+        problems.append("Title exceeds 60 characters")
+    if len(front.get("description", "")) > 155:
+        problems.append("Meta description exceeds 155 characters")
+    opening_blocks = [block.strip() for block in body.split("\n\n") if block.strip()]
+    if not any(block.startswith(">") for block in opening_blocks[:3]):
+        problems.append("No blockquote (Quick Answer) detected near the top — check manually")
+    h2s = re.findall(r"^##\s+(.*)$", body, re.MULTILINE)
+    non_faq_h2s = [h for h in h2s if h.strip().lower() != "faq"]
+    non_question_h2s = [h for h in non_faq_h2s if not h.strip().endswith("?")]
+    if non_question_h2s:
+        problems.append(f"H2s not phrased as questions: {non_question_h2s}")
+    return problems
+
+
+def write_draft(topic: dict, content: str) -> pathlib.Path:
+    front, body = split_frontmatter(content)
+
+    # A model must not choose the publication date. Use the actual draft date so
+    # the blog index and sitemap remain trustworthy and reproducible.
+    front["date"] = dt.date.today().isoformat()
+
+    problems = qa_check(front, body)
+    if problems:
+        print("  QA warnings (fix before opening a PR):")
+        for p in problems:
+            print(f"    - {p}")
+
+    # Sanitize the body to escape JSX-breaking characters ({, })
+    # that the AI may produce in prose text.
+    body = sanitize_body(body)
+
+    full_content = (
+        "---\n" + yaml.safe_dump(front, sort_keys=False, allow_unicode=True) + "---\n"
+        + body.rstrip() + "\n"
+    )
+
+    POSTS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = POSTS_DIR / f"{slugify(topic['keyword'])}.mdx"
+    out_path.write_text(full_content, encoding="utf-8")
+    return out_path
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--topic-id", help="Draft a new post from a queued topic id")
+    group.add_argument("--refresh", metavar="SLUG_OR_ID", help="Refresh an existing post")
+    group.add_argument("--all-new", action="store_true", help="Draft every status:new topic")
+    parser.add_argument("--notes", help="Ranking notes to guide a --refresh run")
+    args = parser.parse_args()
+
+    data = load_queue()
+
+    if args.all_new:
+        targets = [t for t in data["topics"] if t.get("status") == "new"]
+        if not targets:
+            print("No topics with status: new")
+            return
+        for t in targets:
+            _draft_one(t, data)
+        save_queue(data)
+        return
+
+    if args.topic_id:
+        topic = find_topic(data, args.topic_id)
+        _draft_one(topic, data)
+        save_queue(data)
+        return
+
+    if args.refresh:
+        topic = find_topic(data, args.refresh)
+        existing_path = POSTS_DIR / f"{slugify(topic['keyword'])}.mdx"
+        if not existing_path.exists():
+            sys.exit(f"No existing post found at {existing_path} to refresh")
+        existing_body = existing_path.read_text(encoding="utf-8")
+        content = generate(topic, refresh_notes=args.notes, existing_body=existing_body)
+        out_path = write_draft(topic, content)
+        print(f"Refreshed: {out_path}")
+        return
+
+
+def _draft_one(topic: dict, data: dict) -> None:
+    print(f"Generating: {topic['keyword']} ...")
+    content = generate(topic)
+    out_path = write_draft(topic, content)
+    topic["status"] = "drafted"
+    print(f"  -> {out_path}")
+
+
+if __name__ == "__main__":
+    main()
